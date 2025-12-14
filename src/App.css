@@ -1,32 +1,47 @@
 .app {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  justify-content: center;
   padding: 2rem;
 }
 
-.clock-container {
-  text-align: center;
-}
-
-.clock {
-  font-size: 4rem;
-  font-weight: 700;
-  color: #333;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.05em;
-}
-
 .cat-container {
+  position: relative;
   max-width: 100%;
   display: flex;
   justify-content: center;
 }
 
+.clock {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
 .cat-image {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,12 +50,21 @@
 /* Tablet and below */
 @media (max-width: 768px) {
   .app {
-    gap: 1.5rem;
     padding: 1rem;
   }
 
   .clock {
-    font-size: 3rem;
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .date {
+    font-size: 0.8rem;
+  }
+
+  .time {
+    font-size: 1.5rem;
   }
 
   .cat-image {
@@ -52,10 +76,16 @@
 /* Mobile */
 @media (max-width: 480px) {
   .clock {
-    font-size: 2.5rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    padding: 0.5rem 0.75rem;
   }
 
-  .app {
-    gap: 1rem;
+  .date {
+    font-size: 0.75rem;
+  }
+
+  .time {
+    font-size: 1.3rem;
   }
 }

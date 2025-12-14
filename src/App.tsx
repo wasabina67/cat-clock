@@ -19,18 +19,25 @@ function App() {
     hour12: true
   })
 
+  const formattedDate = time.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+
   return (
     <>
       <div className="app">
-        <div className="clock-container">
-          <div className="clock">{formattedTime}</div>
-        </div>
         <div className="cat-container">
           <img
             src="https://cdn2.thecatapi.com/images/zly78vxmW.jpg"
             alt="cat"
             className="cat-image"
           />
+          <div className="clock">
+            <div className="date">{formattedDate}</div>
+            <div className="time">{formattedTime}</div>
+          </div>
         </div>
       </div>
     </>
