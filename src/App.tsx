@@ -26,21 +26,19 @@ function App() {
   })
 
   return (
-    <>
-      <div className="app">
-        <div className="cat-container">
-          <img
-            src="https://cdn2.thecatapi.com/images/zly78vxmW.jpg"
-            alt="cat"
-            className="cat-image"
-          />
-          <div className="clock">
-            <div className="date">{formattedDate}</div>
-            <div className="time">{formattedTime}</div>
-          </div>
+    <div className="app">
+      <div className="cat-container">
+        <img
+          src="https://cdn2.thecatapi.com/images/zly78vxmW.jpg"
+          alt="cat"
+          className="cat-image"
+        />
+        <div className="clock">
+          <div className="date">{formattedDate}</div>
+          <div className="time">{formattedTime}</div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
