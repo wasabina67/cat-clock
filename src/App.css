@@ -1,0 +1,61 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.clock-container {
+  text-align: center;
+}
+
+.clock {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #333;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+.cat-container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cat-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+  .app {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .clock {
+    font-size: 3rem;
+  }
+
+  .cat-image {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .clock {
+    font-size: 2.5rem;
+  }
+
+  .app {
+    gap: 1rem;
+  }
+}

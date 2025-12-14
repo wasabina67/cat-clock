@@ -1,9 +1,38 @@
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date())
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  const formattedTime = time.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  })
+
   return (
     <>
-      <h1>test</h1>
+      <div className="app">
+        <div className="clock-container">
+          <div className="clock">{formattedTime}</div>
+        </div>
+        <div className="cat-container">
+          <img
+            src="https://cdn2.thecatapi.com/images/zly78vxmW.jpg"
+            alt="cat"
+            className="cat-image"
+          />
+        </div>
+      </div>
     </>
   )
 }
