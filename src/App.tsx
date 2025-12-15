@@ -13,9 +13,10 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const AUTO_RELOAD_INTERVAL_MS = 10 * 60 * 1000 // 10 minutes
     const reloadTimer = setInterval(() => {
       window.location.reload()
-    }, 10 * 60 * 1000) // 10 minutes
+    }, AUTO_RELOAD_INTERVAL_MS)
 
     return () => clearInterval(reloadTimer)
   }, [])
