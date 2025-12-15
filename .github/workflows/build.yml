@@ -26,7 +26,7 @@ jobs:
       - name: Update image
         run: |
           URL=$(curl -G 'https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&order=RANDOM' | jq -r '.[0].url')
-          sed -i "32s|src=\".*\"|src=\"$URL\"|" src/App.tsx
+          sed -i "41s|src=\".*\"|src=\"$URL\"|" src/App.tsx
 
       - name: Build
         run: npm run build
