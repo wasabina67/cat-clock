@@ -12,6 +12,14 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const reloadTimer = setInterval(() => {
+      window.location.reload()
+    }, 10 * 60 * 1000) // 10 minutes
+
+    return () => clearInterval(reloadTimer)
+  }, [])
+
   const formattedTime = time.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
