@@ -38,7 +38,7 @@ function App() {
     <div className="app">
       <div className="cat-container">
         <img
-          src="https://cdn2.thecatapi.com/images/d76.jpg"
+          src="https://cdn2.thecatapi.com/images/ef6.jpg"
           alt="cat"
           className="cat-image"
         />
