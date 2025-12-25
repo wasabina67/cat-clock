@@ -2,58 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Commands
 
-This is a React-based clock application that displays a random cat image from The Cat API alongside the current time and date. The project is built with Vite and TypeScript, and is deployed via GitHub Pages.
-
-## Development Commands
-
-```bash
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Run linter
-npm run lint
-
-# Preview production build
-npm run preview
-```
-
-## Build Configuration
-
-- **Build tool**: Vite with React plugin
-- **Output directory**: `docs/` (for GitHub Pages)
-- **Base path**: `/cat-clock/` (configured in vite.config.ts)
-- **TypeScript**: Strict mode enabled with bundler module resolution
+- **Dev server**: `npm run dev`
+- **Build**: `npm run build` (runs TypeScript compiler then Vite build, outputs to `docs/`)
+- **Lint**: `npm run lint`
+- **Preview production build**: `npm run preview`
 
 ## Architecture
 
-### Core Components
+This is a React + TypeScript + Vite application that displays a clock with a cat image background.
 
-- **src/App.tsx**: Main application component
-  - Implements a real-time clock using `setInterval` with 1-second updates
-  - Displays a cat image from The Cat API (line 32)
-  - Shows formatted time and date using `toLocaleTimeString` and `toLocaleDateString`
-  - All state managed via React hooks (`useState`, `useEffect`)
+### Key Files
 
-- **src/main.tsx**: Application entry point using React 18+ `createRoot` API
+- `src/App.tsx` - Main component with clock logic and cat image fetching
+- `vite.config.ts` - Configured with base path `/cat-clock/` and outputs to `docs/` for GitHub Pages
+- `public/metadata.json` - Contains the current cat image URL, updated by GitHub Actions
 
-### GitHub Actions Automation
+### How It Works
 
-The `.github/workflows/build.yml` workflow runs hourly and on manual dispatch:
-1. Fetches a random cat image URL from The Cat API
-2. Updates the image URL in `src/App.tsx` line 32 using `sed`
-3. Rebuilds the application
-4. Commits and pushes changes if the image changed
+The app fetches cat images from The Cat API. A GitHub Actions workflow (`.github/workflows/build.yml`) runs on a schedule (weekdays 00:00-09:00 UTC) to:
+1. Fetch a random cat image URL from The Cat API
+2. Write it to `public/metadata.json`
+3. Build and commit the changes
 
-**Important**: When modifying `App.tsx`, be aware that line 32 contains the cat image URL that is automatically updated by CI. The sed command specifically targets this line number, so maintain the structure around the `<img src="...">` element.
-
-## Code Style
-
-- Uses ESLint with TypeScript, React Hooks, and React Refresh plugins
-- Flat config format (eslint.config.js)
-- Ignores `dist/` directory
-- React components use functional components with hooks (no class components)
+The frontend polls `metadata.json` every 10 minutes to check for new images.
