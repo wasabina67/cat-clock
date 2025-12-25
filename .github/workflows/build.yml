@@ -23,10 +23,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Update image
+      - name: Update metadata.json
         run: |
           URL=$(curl -G 'https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&order=RANDOM' | jq -r '.[0].url')
-          sed -i "41s|src=\".*\"|src=\"$URL\"|" src/App.tsx
+          echo "{\"imageUrl\":\"$URL\",\"timestamp\":$(date +%s)}" > public/metadata.json
 
       - name: Build
         run: npm run build

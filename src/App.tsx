@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   const [time, setTime] = useState(new Date())
+  const [catImageUrl, setCatImageUrl] = useState('https://cdn2.thecatapi.com/images/MTk3NDc4MQ.jpg')
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -13,12 +14,22 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const AUTO_RELOAD_INTERVAL_MS = 10 * 60 * 1000 // 10 minutes
-    const reloadTimer = setInterval(() => {
-      window.location.reload()
-    }, AUTO_RELOAD_INTERVAL_MS)
+    const fetchCatImageUrl = async () => {
+      try {
+        const response = await fetch('/cat-clock/metadata.json?t=' + Date.now()) // Cache busting
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+        const data = await response.json()
+        if (data.imageUrl) setCatImageUrl(data.imageUrl)
+      } catch (error) {
+        console.error('Failed to fetch cat image metadata: ', error)
+      }
+    }
 
-    return () => clearInterval(reloadTimer)
+    fetchCatImageUrl() // Initial fetch
+    const CHECK_INTERVAL_MS = 10 * 60 * 1000 // 10 minutes
+    const fetchTimer = setInterval(fetchCatImageUrl, CHECK_INTERVAL_MS)
+
+    return () => clearInterval(fetchTimer)
   }, [])
 
   const formattedTime = time.toLocaleTimeString('en-US', {
@@ -38,7 +49,7 @@ function App() {
     <div className="app">
       <div className="cat-container">
         <img
-          src="https://cdn2.thecatapi.com/images/MTk3NDc4MQ.jpg"
+          src={catImageUrl}
           alt="cat"
           className="cat-image"
         />
