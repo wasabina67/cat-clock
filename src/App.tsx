@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   const [time, setTime] = useState(new Date())
-  const [catImageUrl, setCatImageUrl] = useState('https://cdn2.thecatapi.com/images/MTk3NDc4MQ.jpg')
+  const [catImageUrl, setCatImageUrl] = useState('')
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,11 +48,13 @@ function App() {
   return (
     <div className="app">
       <div className="cat-container">
-        <img
-          src={catImageUrl}
-          alt="cat"
-          className="cat-image"
-        />
+        {catImageUrl && (
+          <img
+            src={catImageUrl}
+            alt="cat"
+            className="cat-image"
+          />
+        )}
         <div className="clock">
           <div className="date">{formattedDate}</div>
           <div className="time">{formattedTime}</div>
